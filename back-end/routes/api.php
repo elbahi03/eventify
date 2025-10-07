@@ -4,9 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\EventsController;
-
-
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +27,14 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth:sanctum');
 
-// Routes pour les events
 
-Route::get('/events', [EventsController::class, 'index']); // Tous les événements
-Route::get('/events/{id}', [EventsController::class, 'show']); // Un seul événement
-Route::get('/events/category/{category}', [EventsController::class, 'searchByCategory']); // Par catégorie
-Route::get('/events/type/{type}', [EventsController::class, 'searchByType']); // Par type
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/cree-event', [EventsController::class, 'store']); // Créer un event
-    Route::put('/events/{id}', [EventsController::class, 'update']); // Modifier un event
-    Route::delete('/events/{id}', [EventsController::class, 'destroy']); // Supprimer un event
-    Route::get('/events/user/{userId}', [EventsController::class, 'getUserEvents']); // Événements par utilisateur
-});
+// Event routes
+Route::post('/events', [EventController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::get('/events/user/{userId}', [EventController::class, 'getUserEvents'])->middleware('auth:sanctum');
+Route::get('/events/categorie/{categorie}', [EventController::class, 'searchByCategory']);
+Route::put('/events/{id}', [EventController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth:sanctum');
+Route::get('/events/search/{title}', [EventController::class, 'searchByTitle']);
+Route::get('/events/search/date-local/{local}', [EventController::class, 'searchByDateOrLocation']);
