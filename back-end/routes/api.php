@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ParticipantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,11 @@ Route::put('/events/{id}', [EventController::class, 'update'])->middleware('auth
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth:sanctum');
 Route::get('/events/search/{title}', [EventController::class, 'searchByTitle']);
 Route::get('/events/search/date-local/{local}', [EventController::class, 'searchByDateOrLocation']);
+Route::get('/events/aleatoire', [EventController::class, 'getRandomEvents']);
+
+// Participant routes
+
+Route::post('/participants', [ParticipantController::class, 'store']);
+Route::get('/participants/event/{eventId}', [ParticipantController::class, 'getEventParticipants'])->middleware('auth:sanctum');
+Route::delete('/participants/{id}', [ParticipantController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('/participants/verify/{CIN}', [ParticipantController::class, 'verifyParticipant']);

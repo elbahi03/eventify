@@ -117,6 +117,10 @@ class EventController extends Controller
         return response()->json($events);
     }
 
-    
-       
+    // affiche 4 event par aleatoire
+    public function randomEvents(){
+        $events = Event::inRandomOrder()->take(4)->get();
+        return response()->json($events);
+    }
+     
 }
