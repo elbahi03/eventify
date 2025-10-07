@@ -23,7 +23,7 @@ export default function Auth() {
 
       // Optionally, save the token in localStorage
       localStorage.setItem("token", response.data.token);
-
+      navigate('/home');
 
 
     } catch (error) {

@@ -28,6 +28,8 @@ export default function Register() {
 
             // Optionally store token
             localStorage.setItem("token", response.data.token);
+            navigate('/home');
+
         } catch (error) {
             setMessage(" Registration failed. Please check your inputs.");
             console.error("Register error:", error);

@@ -33,6 +33,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $token = $user->createToken('api-token')->plainTextToken;
+        $user->addRole("organise");
 
         return response()->json([
             'user' => $user,
