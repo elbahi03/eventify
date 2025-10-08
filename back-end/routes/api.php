@@ -37,13 +37,13 @@ Route::get('/events/user/{userId}', [EventController::class, 'getUserEvents'])->
 Route::get('/events/categorie/{categorie}', [EventController::class, 'searchByCategory']);
 Route::put('/events/{id}', [EventController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth:sanctum');
-Route::get('/events/search/{title}', [EventController::class, 'searchByTitle']);
+Route::get('/events/search/{title}', [EventController::class, 'searchByType']);
 Route::get('/events/search/date-local/{local}', [EventController::class, 'searchByDateOrLocation']);
-Route::get('/events/aleatoire', [EventController::class, 'getRandomEvents']);
+Route::get('/events-aleatoire', [EventController::class, 'randomEvents']);
 
 // Participant routes
 
 Route::post('/participants', [ParticipantController::class, 'store']);
 Route::get('/participants/event/{eventId}', [ParticipantController::class, 'getEventParticipants'])->middleware('auth:sanctum');
 Route::delete('/participants/{id}', [ParticipantController::class, 'destroy'])->middleware('auth:sanctum');
-Route::post('/participants/verify/{CIN}', [ParticipantController::class, 'verifyParticipant']);
+Route::post('/participants/verify', [ParticipantController::class, 'verifyParticipant']);

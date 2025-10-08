@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('CIN');
             $table->timestamps();
+
+            $table->unique(['event_id', 'email']);
+            $table->unique(['event_id', 'CIN']);
         });
     }
 
