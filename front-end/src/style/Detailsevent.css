@@ -1,0 +1,84 @@
+.event-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1rem;
+    background-color: #f9fafb;
+    min-height: 100vh;
+  }
+  
+  /* --- Carte principale --- */
+  .event-card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 700px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* --- Titre --- */
+  .event-title {
+    text-align: center;
+    color: #007bff;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* --- Informations --- */
+  .event-info p {
+    margin: 0.6rem 0;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .event-info strong {
+    color: #111;
+  }
+  
+  /* --- Bouton participer --- */
+  .participate-btn {
+    display: block;
+    margin: 2rem auto 1rem;
+    padding: 0.7rem 1.8rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .participate-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* --- Formulaire --- */
+  .participant-form {
+    margin-top: 1.5rem;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+  }
+  
+  /* --- États --- */
+  .loading,
+  .error,
+  .not-found {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 3rem;
+  }
+  
+  .error {
+    color: #e74c3c;
+  }
+  

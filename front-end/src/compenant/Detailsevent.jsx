@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEventById, selectCurrentEvent, selectEventsLoading, selectEventsError } from "../features/events/eventsSlice";
+import {
+  fetchEventById,
+  selectCurrentEvent,
+  selectEventsLoading,
+  selectEventsError,
+} from "../features/events/eventsSlice";
 import AddParticipant from "./AddParticipant";
-import { useState } from "react";
+import "../style/Detailsevent.css";
 
 export default function EventDetails() {
   const { id } = useParams();
@@ -17,27 +22,40 @@ export default function EventDetails() {
     dispatch(fetchEventById(id));
   }, [dispatch, id]);
 
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p>Erreur : {error}</p>;
-  if (!event) return <p>Événement introuvable</p>;
+  if (loading) return <p className="loading">Chargement...</p>;
+  if (error) return <p className="error">Erreur : {error}</p>;
+  if (!event) return <p className="not-found">Événement introuvable</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">{event.title}</h2>
-      <p><strong>Date :</strong> {event.date}</p>
-      <p><strong>Lieu :</strong> {event.location}</p>
-      <p><strong>Catégorie :</strong> {event.categorie}</p>
-      <p className="mt-4">{event.description}</p>
-      <button
-        onClick={() => setShowForm(!showForm)}
-        className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-      >
-        {showForm ? "Annuler" : "Participer"}
-      </button>
+    <div className="event-details-container">
+      <div className="event-card">
+        <h2 className="event-title">{event.title}</h2>
 
-      {/* Formulaire participant */}
-      {showForm && <AddParticipant eventId={event.id} />}
+        <div className="event-info">
+          <p><strong>Date :</strong> {event.date}</p>
+          <p><strong>Lieu :</strong> {event.location}</p>
+          <p><strong>Catégorie :</strong> {event.categorie}</p>
+          <p><strong>Type :</strong> {event.type}</p>
+          <p><strong>Description :</strong> {event.description}</p>
+          <p><strong>Capacité :</strong> {event.capacity}</p>
+          <p><strong>Status :</strong> {event.status}</p>
+          <p><strong>Heure début :</strong> {event.start_time}</p>
+          <p><strong>Heure fin :</strong> {event.end_time}</p>
+        </div>
 
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="participate-btn"
+        >
+          {showForm ? "Annuler" : "Participer"}
+        </button>
+
+        {showForm && (
+          <div className="participant-form">
+            <AddParticipant eventId={event.id} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

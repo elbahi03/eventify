@@ -7,6 +7,7 @@ import {
   selectEventsError,
 } from "../features/events/eventsSlice";
 import { useNavigate } from "react-router-dom";
+import "../style/Listevent.css";
 
 export default function Aleratoire () {
   const dispatch = useDispatch();
@@ -35,30 +36,20 @@ export default function Aleratoire () {
 
   return (
     <div>
-      <h2> Sugsugtion </h2>
+      <h2 className="center"> Sugsugtion </h2>
 
-      <div>
+      <div className="events-grid">
         {events.map((event) => (
-          <div
-            key={event.id}
-
-          >
-
-            <h3 className="text-lg font-semibold mb-1">{event.title}</h3>
-            <p className="text-gray-600 mb-1">
-              <strong>Date :</strong> {event.date}
-            </p>
-            <p className="text-gray-600 mb-2">
-              <strong>Lieu :</strong> {event.location}
-            </p>
-            {event.category && (
-              <p className="text-gray-600 mb-2">
-                <strong>Catégorie :</strong> {event.categorie}
-              </p>
+          <div key={event.id} className="event-card">
+            <h3>{event.title}</h3>
+            <p><strong>Date :</strong> {event.date}</p>
+            <p><strong>Lieu :</strong> {event.location}</p>
+            {event.categorie && (
+              <p><strong>Catégorie :</strong> {event.categorie}</p>
             )}
-            <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 w-full"
-              onClick={() => handleDetails(event.id)} >
-              Voir Détails
+
+            <button onClick={() => handleDetails(event.id)}>
+              Détails
             </button>
           </div>
         ))}

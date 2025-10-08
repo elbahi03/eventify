@@ -33,6 +33,7 @@ export default function Auth() {
   };
 
   return (
+  <div class="auth-body">
     <div className="wrapper">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
@@ -75,6 +76,7 @@ export default function Auth() {
           </p>
         </div>
       </form>
+    </div>
     </div>
   );
 }

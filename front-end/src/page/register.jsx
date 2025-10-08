@@ -36,6 +36,7 @@ export default function Register() {
         }
     };
     return (
+        <div class="auth-body">
         <div className="wrapper">
             <form onSubmit={handleRegister}>
                 <h1>Register</h1>
@@ -94,6 +95,7 @@ export default function Register() {
                     </p>
                 </div>
             </form>
+        </div>
         </div>
     );
 }
