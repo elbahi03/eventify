@@ -1,0 +1,63 @@
+.add-participant-container{
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.add-participant-container h2{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+.wrapper .inputbox {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 20px;
+    color: black;
+    background-color: blue;
+}
+
+.input-field{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    padding: 20px 45px 20px 20px;
+    margin: 5px 0px;
+}
+
+.submit-button{
+    width: 45%;
+    height: 45px;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    background: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 5px;
+}
+
+.reset-button{
+    width: 45%;
+    height: 45px;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    background: #f44336;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 5px;
+}
+

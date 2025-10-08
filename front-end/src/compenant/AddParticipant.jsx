@@ -9,6 +9,7 @@ import {
     clearParticipant,
     clearError,
 } from "../features/participants/participantsSlice";
+import "../style/AddParticipants.css";
 
 
 
@@ -68,58 +69,66 @@ export default function AddParticipant({ eventId }) {
     };
 
     return (
-        <div className="p-6 max-w-md mx-auto bg-white shadow-md rounded">
-            <h2 className="text-xl font-bold mb-4">Ajouter un participant</h2>
+        <div className="add-participant-container">
+            <h2>Ajouter un participant</h2>
 
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} >
+            <div className="inputbox">
                 <input
                     type="text"
                     name="full_name"
                     placeholder="Nom complet *"
+                    className="input-field"
                     value={formData.full_name}
                     onChange={handleChange}
-                    className="border p-2 w-full rounded"
                     required
                 />
+                </div>
+                <div className="inputbox">
                 <input
                     type="email"
                     name="email"
                     placeholder="Email *"
+                    className="input-field"
                     value={formData.email}
                     onChange={handleChange}
-                    className="border p-2 w-full rounded"
                     required
                 />
+                </div>
+                <div className="inputbox">
                 <input
                     type="text"
                     name="phone_number"
                     placeholder="Numéro téléphone"
+                    className="input-field"
                     value={formData.phone_number}
                     onChange={handleChange}
-                    className="border p-2 w-full rounded"
                 />
+                </div>
+                <div className="inputbox">
                 <input
                     type="text"
                     name="CIN"
                     placeholder="CIN *"
+                    className="input-field"
                     value={formData.CIN}
                     onChange={handleChange}
-                    className="border p-2 w-full rounded"
                     required
                 />
+                </div>
 
                 <div className="flex justify-between">
                     <button
                         type="submit"
+                        className="submit-button"
                         disabled={loading}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                     >
                         {loading ? "Envoi..." : "Ajouter"}
                     </button>
                     <button
                         type="button"
+                        className="reset-button"
                         onClick={handleReset}
-                        className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
                     >
                         Réinitialiser
                     </button>
@@ -128,8 +137,8 @@ export default function AddParticipant({ eventId }) {
 
             {/* Affichage du participant ajouté */}
             {participant && (
-                <div className="mt-6 p-4 bg-green-100 border border-green-400 rounded">
-                    <h3 className="font-bold text-lg mb-2">Participant ajouté avec succès</h3>
+                <div>
+                    <h3>Participant ajouté avec succès</h3>
                     <p><strong>id :</strong> {participant.id}</p>
                     <p><strong>Nom :</strong> {participant.full_name}</p>
                     <p><strong>Email :</strong> {participant.email}</p>
@@ -137,7 +146,6 @@ export default function AddParticipant({ eventId }) {
                     <p><strong>CIN :</strong> {participant.CIN}</p>
                     <button
                         onClick={handleDownloadTicket}
-                        className="mt-2 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                     >
                         Télécharger ticket
                     </button>
@@ -145,7 +153,7 @@ export default function AddParticipant({ eventId }) {
             )}
 
             {error && (
-                <div className="mt-4 p-2 bg-red-100 text-red-700 border border-red-400 rounded">
+                <div>
                     {error}
                 </div>
             )}

@@ -37,6 +37,7 @@ export default function EventDetails() {
 
       {/* Formulaire participant */}
       {showForm && <AddParticipant eventId={event.id} />}
+
     </div>
   );
 }
