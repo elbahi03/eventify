@@ -1,4 +1,3 @@
-// participantsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -53,12 +52,18 @@ export const deleteParticipant = createAsyncThunk(
 // POST /participants/verify
 export const verifyParticipant = createAsyncThunk(
   "participants/verify",
-  async (data, { rejectWithValue }) => {
+  async ({ CIN, eventId }, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`${API_BASE}/participants/verify`, data);
-      // controller retourne { message, participant } si trouvé
+      console.log("Data to send :",{ CIN, eventId });
+      
+      const res = await axios.post(`${API_BASE}/participants/verify`, { 
+        CIN,
+        event_id: eventId 
+      });
       return res.data;
     } catch (e) {
+      console.log("Error while sending verfiy :",e);
+      
       return rejectWithValue(e.response?.data?.message || e.message);
     }
   }
@@ -87,7 +92,11 @@ const participantsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchParticipantsByEvent.fulfilled, (state, action) => {
-        state.participants = action.payload;
+        state.participants = Array.isArray(action.payload) ? action.payload : 
+                           Array.isArray(action.payload?.data) ? action.payload.data :
+                           Array.isArray(action.payload?.participants) ? action.payload.participants : [];
+        state.loading = false;
+        state.error = null;
       })
       .addCase(addParticipant.fulfilled, (state, action) => {
         // push nouvel participant (si on a déjà la liste d'un event)

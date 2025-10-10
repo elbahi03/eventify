@@ -7,8 +7,7 @@ import {
   selectEventsError,
   deleteEvent,
   updateEvent,
-} from "../features/events/eventsSlice";
-import { useSelector as useAuthSelector } from "react-redux";
+} from "../../features/events/eventsSlice";
 
 export default function UserEvents() {
   const dispatch = useDispatch();
@@ -17,15 +16,17 @@ export default function UserEvents() {
   const loading = useSelector(selectEventsLoading);
   const error = useSelector(selectEventsError);
 
-  // Récupération du userId depuis le store auth (supposé présent)
-  const user = useAuthSelector((state) => state.auth.user);
-  const token = useAuthSelector((state) => state.auth.token);
+  // Récupération du userId et token depuis le store auth
+  const user = useSelector((state) => state.auth?.user);
+  const token = useSelector((state) => state.auth?.token);
 
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({ title: "", description: "", date: "", location: "" });
 
   useEffect(() => {
-    if (user?.id) dispatch(fetchEventsByUser(user.id));
+    if (user?.id) {
+      dispatch(fetchEventsByUser(user.id));
+    }
   }, [dispatch, user]);
 
   const handleEditClick = (event) => {
@@ -41,7 +42,7 @@ export default function UserEvents() {
   const handleDeleteClick = (id) => {
     if (window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
       dispatch(deleteEvent(id)).then(() => {
-        dispatch(fetchEventsByUser(user.id));
+        if (user?.id) dispatch(fetchEventsByUser(user.id));
       });
     }
   };
@@ -50,7 +51,7 @@ export default function UserEvents() {
     e.preventDefault();
     dispatch(updateEvent({ id, data: formData })).then(() => {
       setEditingId(null);
-      dispatch(fetchEventsByUser(user.id));
+      if (user?.id) dispatch(fetchEventsByUser(user.id));
     });
   };
 

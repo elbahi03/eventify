@@ -1,0 +1,23 @@
+.org-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  .org-sidebar {
+    width: 220px;
+    background: #222;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .org-sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .org-main {
+    flex: 1;
+    padding: 30px;
+    background: #f7f7f7;
+  }

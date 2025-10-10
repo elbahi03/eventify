@@ -37,12 +37,16 @@ export const fetchEventsByUser = createAsyncThunk(
   "events/fetchByUser",
   async (userId, { getState, rejectWithValue }) => {
     try {
-      const token = getState().auth?.token;
+      const token = localStorage.getItem("token")
       const res = await axios.get(`${API_BASE}/events/user/${userId}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
+      console.log("res :",res);
+      
       return res.data;
     } catch (e) {
+      console.log("Error :",e);
+      
       return rejectWithValue(e.response?.data?.message || e.message);
     }
   }
