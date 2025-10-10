@@ -6,7 +6,6 @@ import "../styles/OrganizerLayout.css";
 function OrganizerLayout() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const organizerName = "Nom Organisateur";
 
   const handleLogout = async () => {
     try {
@@ -37,7 +36,7 @@ function OrganizerLayout() {
       </div>
 
       <aside className={`org-sidebar ${isMenuOpen ? "open" : ""}`}>
-        <h2>{organizerName}</h2>
+        <h2>organisateur</h2>
         <nav>
           <NavLink to="/organizer/dashboard" onClick={() => setIsMenuOpen(false)}>
             Dashboard
