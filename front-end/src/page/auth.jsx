@@ -13,6 +13,10 @@ export default function Auth() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  if (localStorage.getItem("token")) {
+    navigate('/organizer/dashboard');
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoding(true); // Démarre le chargement

@@ -207,10 +207,22 @@ const eventsSlice = createSlice({
       .addCase(randomEvents.fulfilled, (state, action) => {
         state.events = action.payload;
       })
+      .addCase(createEvent.pending, (state)=>{
+        state.loading=true,
+        state.error=null
+        console.log("Creating event...");
+      })
       .addCase(createEvent.fulfilled, (state, action) => {
-        // ajouter nouvel event (au début)
         state.events.unshift(action.payload);
         state.event = action.payload;
+        state.loading=false,
+        state.error=null
+        console.log("Event created:", action.payload);
+      })
+      .addCase(createEvent.rejected,(state,action)=>{
+        state.loading=false,
+        state.erreur=action.payload
+        console.error("Error creating event:", action.payload);
       })
       .addCase(updateEvent.fulfilled, (state, action) => {
         const updated = action.payload;
