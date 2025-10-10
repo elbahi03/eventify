@@ -1,0 +1,140 @@
+/* ======================================================= */
+/* 1. Variables Globales (Rappel) */
+/* ======================================================= */
+:root {
+    --color-primary: #FF7F50; /* Orange Vif */
+    --color-secondary: #2C3E50; /* Bleu Profond */
+    --color-background-light: #ffffff;
+    --color-background-dark: #ecf0f1;
+    --color-text-dark: #333;
+    --color-border: #E0E0E0; /* Gris clair pour les bordures */
+    --spacing-unit: 8px;
+  }
+  
+  /* ======================================================= */
+  /* 2. Style de la Page Principale */
+  /* ======================================================= */
+  
+  .p-6 { 
+      padding: calc(6 * var(--spacing-unit)); 
+  }
+  
+  .participants-org-container h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: calc(4 * var(--spacing-unit));
+      color: var(--color-secondary);
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: var(--spacing-unit);
+      display: inline-block;
+  }
+  
+  /* ======================================================= */
+  /* 3. Champ de Sélection d'Événement (Select Box) */
+  /* ======================================================= */
+  
+  .mb-6 { 
+      margin-bottom: calc(6 * var(--spacing-unit)); 
+  }
+  
+  .block.text-sm.font-medium.text-gray-700 { /* Le label */
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text-dark);
+      margin-bottom: var(--spacing-unit);
+  }
+  
+  .mt-1.block.w-full.rounded-md { /* Le sélecteur */
+      /* Remplacement des classes Tailwind par du style direct */
+      width: 100%;
+      max-width: 400px; /* Limite la largeur du sélecteur */
+      padding: 10px 12px;
+      border: 1px solid var(--color-border); /* border-gray-300 */
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+      background-color: var(--color-background-light);
+      color: var(--color-text-dark);
+      transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .mt-1.block.w-full.rounded-md:focus {
+      border-color: var(--color-primary); /* focus:border-indigo-500 */
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 127, 80, 0.2); /* focus:ring-indigo-500 */
+  }
+  
+  /* ======================================================= */
+  /* 4. Liste et Affichage des Participants */
+  /* ======================================================= */
+  
+  /* Messages d'état */
+  .text-center { text-align: center; }
+  .text-gray-500 { color: #888; font-style: italic; }
+  .text-gray-600 { color: #666; }
+  
+  .mt-4 { margin-top: calc(4 * var(--spacing-unit)); }
+  
+  /* Conteneur de la liste (ul) */
+  .divide-y.divide-gray-200 {
+      background-color: var(--color-background-light);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      /* Ajout manuel de la division des lignes (divide-y) */
+  }
+  
+  /* Style de chaque élément de participant (li) */
+  .divide-y.divide-gray-200 > li {
+      padding-top: calc(3 * var(--spacing-unit)); /* py-4 */
+      padding-bottom: calc(3 * var(--spacing-unit));
+      padding-left: calc(3 * var(--spacing-unit));
+      padding-right: calc(3 * var(--spacing-unit));
+      border-bottom: 1px solid var(--color-border); /* division */
+      transition: background-color 0.2s ease;
+  }
+  
+  .divide-y.divide-gray-200 > li:last-child {
+      border-bottom: none; /* Supprimer la bordure du dernier élément */
+  }
+  
+  .divide-y.divide-gray-200 > li:hover {
+      background-color: #fcfcfc; /* Légère indication au survol */
+  }
+  
+  /* Flexbox interne pour l'alignement (nom/email vs date) */
+  .flex.justify-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  /* Nom du participant */
+  .font-medium {
+      font-weight: 600;
+      color: var(--color-secondary);
+      font-size: 1.1rem;
+  }
+  
+  /* Email du participant */
+  .text-gray-600 {
+      color: #666;
+      font-size: 0.95rem;
+  }
+  
+  /* Date d'inscription */
+  .text-sm.text-gray-500 {
+      font-size: 0.85rem;
+      color: #999;
+  }
+  
+  /* Adaptation Mobile: Les éléments restent empilés verticalement si l'écran est trop petit */
+  @media (max-width: 600px) {
+      .flex.justify-between {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+  
+      .text-sm.text-gray-500 {
+          margin-top: calc(1 * var(--spacing-unit));
+      }
+  }

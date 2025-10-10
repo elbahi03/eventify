@@ -1,0 +1,264 @@
+/* ======================================================= */
+/* 1. Variables & Global Reset (Modernisé) */
+/* ======================================================= */
+:root {
+    --color-accent: #FF6B6B; /* Corail Moderne (Accent/Primaire) */
+    --color-secondary: #34495E; /* Gris Bleu Profond (Titre/Texte) */
+    --color-success: #1ABC9C; /* Turquoise Vif (Succès) */
+    --color-danger: #E74C3C; /* Rouge Échec */
+    --color-info: #5D9CEC; /* Bleu Doux (Bouton principal) */
+    --color-background-page: #F4F6F9; /* Arrière-plan très clair */
+    --color-background-card: #ffffff;
+    --color-text-dark: #2C3E50;
+    --color-text-light: #ffffff;
+    --spacing-unit: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* ======================================================= */
+  /* 2. Style de la Page Principale */
+  /* ======================================================= */
+  
+  .checkin-page-container {
+      padding: calc(8 * var(--spacing-unit)); /* Plus d'espace */
+      background-color: var(--color-background-page);
+      min-height: 100vh;
+      box-sizing: border-box;
+  }
+  
+  .checkin-title {
+      font-size: 2.2rem; /* Légèrement plus grand */
+      font-weight: 800; /* Plus impactant */
+      margin-bottom: calc(8 * var(--spacing-unit));
+      color: var(--color-secondary);
+      text-align: center;
+      letter-spacing: -0.5px;
+  }
+  
+  /* ======================================================= */
+  /* 3. Carte du Formulaire de Check-in (Design Flottant) */
+  /* ======================================================= */
+  
+  .checkin-form-card {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: var(--color-background-card);
+      padding: calc(10 * var(--spacing-unit));
+      border-radius: 16px; /* Bords plus arrondis */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Ombre plus douce et plus profonde */
+      border: none; /* Supprimer la bordure supérieure */
+      transition: transform 0.3s ease;
+  }
+  
+  .checkin-form-card:hover {
+      transform: translateY(-2px); /* Léger effet de survol moderne */
+  }
+  
+  .form-group {
+      margin-bottom: calc(5 * var(--spacing-unit));
+  }
+  
+  .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: calc(2 * var(--spacing-unit));
+      color: var(--color-secondary);
+      font-size: 1rem;
+      opacity: 0.8;
+  }
+  
+  .form-select,
+  .form-input {
+      display: block;
+      width: 100%;
+      padding: 14px 16px; /* Plus de padding */
+      border: 1px solid #E0E6ED; 
+      border-radius: 10px; /* Bords doux */
+      color: var(--color-text-dark); 
+      transition: all 0.3s;
+      font-size: 1rem;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  
+  .form-select:focus,
+  .form-input:focus {
+      border-color: var(--color-accent); /* Focus sur la couleur moderne */
+      box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2); 
+      outline: none;
+  }
+  
+  /* ======================================================= */
+  /* 4. Bouton de Vérification (Effet de Relief) */
+  /* ======================================================= */
+  
+  .checkin-button {
+      width: 100%;
+      background-color: var(--color-info);
+      color: var(--color-text-light);
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 10px;
+      border: none;
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+      cursor: pointer;
+      text-transform: none; /* Moins agressif */
+      letter-spacing: 0;
+      box-shadow: 0 4px 15px rgba(93, 156, 236, 0.4);
+  }
+  
+  .checkin-button:hover:not(.disabled) {
+      background-color: #4A90E2;
+      box-shadow: 0 6px 20px rgba(93, 156, 236, 0.5);
+  }
+  
+  .checkin-button:active:not(.disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 3px 10px rgba(93, 156, 236, 0.3);
+  }
+  
+  .checkin-button.disabled,
+  .checkin-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      background-color: #BDC3C7;
+      box-shadow: none;
+  }
+  
+  /* ======================================================= */
+  /* 5. Message d'Erreur Simple */
+  /* ======================================================= */
+  
+  .status-message {
+      margin-top: calc(5 * var(--spacing-unit));
+      padding: calc(3 * var(--spacing-unit));
+      border-radius: 10px;
+      font-weight: 600;
+      border: none;
+      text-align: center;
+      font-size: 0.95rem;
+  }
+  
+  .status-message.error {
+      background-color: #FADBD8; /* Rouge doux */
+      color: var(--color-danger);
+      border: 1px solid #F5B7B1;
+  }
+  
+  /* ======================================================= */
+  /* 6. MODAL de Résultat (Design Épuré) */
+  /* ======================================================= */
+  
+  .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(44, 62, 80, 0.8); /* Fond plus sombre */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(8px); /* Blur plus intense */
+  }
+  
+  .participant-card-modal {
+      position: relative;
+      background-color: var(--color-background-card);
+      padding: calc(12 * var(--spacing-unit));
+      border-radius: 20px; /* Bords très doux */
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); 
+      max-width: 90%;
+      width: 480px;
+      animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .modal-close-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 2.5rem;
+      cursor: pointer;
+      color: #BDC3C7; /* Gris léger */
+      transition: color 0.3s, transform 0.3s;
+      line-height: 1;
+  }
+  
+  .modal-close-button:hover {
+      color: var(--color-accent);
+      transform: rotate(180deg);
+  }
+  
+  .card-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--color-secondary);
+      margin-bottom: calc(5 * var(--spacing-unit));
+      border-bottom: 3px solid var(--color-success);
+      padding-bottom: var(--spacing-unit);
+  }
+  
+  .card-info {
+      font-size: 1rem;
+      padding: calc(2 * var(--spacing-unit)) 0;
+  }
+  
+  .card-info p {
+      line-height: 1.6;
+      margin-bottom: calc(2 * var(--spacing-unit));
+      color: var(--color-text-dark);
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 0;
+      border-bottom: 1px dashed #ECF0F1; /* Séparateurs subtils */
+  }
+  
+  .card-info strong {
+      font-weight: 700;
+      color: var(--color-secondary);
+      margin-right: calc(4 * var(--spacing-unit));
+  }
+  
+  .card-status {
+      margin-top: calc(7 * var(--spacing-unit));
+      padding: calc(4 * var(--spacing-unit));
+      border-radius: 12px;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+  }
+  
+  .card-status.success {
+      background-color: var(--color-success);
+      color: var(--color-text-light);
+      box-shadow: 0 8px 20px rgba(26, 188, 156, 0.4);
+  }
+  
+  /* Responsive adjustment for small screens */
+  @media (max-width: 600px) {
+      .checkin-page-container {
+          padding: calc(4 * var(--spacing-unit)); 
+      }
+      .checkin-form-card {
+          padding: calc(6 * var(--spacing-unit));
+          border-radius: 12px;
+      }
+      .checkin-title {
+          font-size: 1.8rem;
+      }
+      .participant-card-modal {
+          padding: calc(8 * var(--spacing-unit));
+          width: 95%;
+      }
+  } 
+  

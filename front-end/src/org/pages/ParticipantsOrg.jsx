@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEventsByUser, selectAllEvents } from "../../features/events/eventsSlice";
 import { fetchParticipantsByEvent } from "../../features/participants/participantsSlice";
+import "../styles/participants.css";
 
 export default function ParticipantsOrg() {
   const dispatch = useDispatch();
@@ -66,8 +67,9 @@ export default function ParticipantsOrg() {
                 <li key={p.id} className="py-4">
                   <div className="flex justify-between">
                     <div>
-                      <p className="font-medium">{p.name}</p>
+                      <p className="font-medium">{p.full_name}</p>
                       <p className="text-gray-600">{p.email}</p>
+                      <p className="text-gray-600">{p.phone_number}</p>
                     </div>
                     <span className="text-sm text-gray-500">
                       {p.created_at ? new Date(p.created_at).toLocaleDateString() : ''}

@@ -1,23 +1,177 @@
+/* ======================================================= */
+/* 1. Variables Globales (Rappel) */
+/* ======================================================= */
+:root {
+  --color-primary: #FF7F50; /* Orange Vif */
+  --color-secondary: #2C3E50; /* Bleu Profond */
+  --color-text-light: #f4f4f4;
+  --color-background-light: #ffffff;
+  --color-background-dark: #ecf0f1; /* Gris très clair pour le fond de page */
+  --color-error: #E74C3C; /* Rouge Erreur (Logout) */
+  --spacing-unit: 8px;
+}
+
+/* ======================================================= */
+/* 2. Mise en Page Globale (Layout) */
+/* ======================================================= */
+
 .org-layout {
-    display: flex;
-    min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-background-dark);
+}
+
+/* ======================================================= */
+/* 3. Barre Latérale (Sidebar) - Navigation */
+/* ======================================================= */
+
+.org-sidebar {
+  width: 250px;
+  background-color: var(--color-secondary);
+  color: var(--color-text-light);
+  padding: calc(4 * var(--spacing-unit)) calc(2 * var(--spacing-unit));
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.org-sidebar h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: calc(5 * var(--spacing-unit));
+  padding-bottom: calc(2 * var(--spacing-unit));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.org-sidebar nav {
+  flex-grow: 1;
+}
+
+.org-sidebar nav a {
+  display: block;
+  padding: 12px 15px;
+  color: var(--color-text-light);
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: var(--spacing-unit);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.org-sidebar nav a:hover {
+  background-color: #3a5068;
+}
+
+.org-sidebar nav a.active {
+  background-color: var(--color-primary);
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.org-sidebar button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-error);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: calc(8 * var(--spacing-unit));
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.org-sidebar button:hover {
+  background-color: #c0392b;
+}
+
+/* ======================================================= */
+/* 4. Contenu Principal (Main) */
+/* ======================================================= */
+
+.org-main {
+  flex-grow: 1;
+  padding: calc(4 * var(--spacing-unit));
+  overflow-y: auto;
+}
+
+.org-main h1 {
+  font-size: 2.5rem;
+  color: var(--color-secondary);
+  margin-bottom: calc(6 * var(--spacing-unit));
+}
+
+/* ======================================================= */
+/* 5. BURGER MENU */
+/* ======================================================= */
+
+.burger {
+  display: none;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+}
+
+.burger .line {
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-secondary);
+  margin: 5px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.burger .line.open:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.burger .line.open:nth-child(2) {
+  opacity: 0;
+}
+.burger .line.open:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ======================================================= */
+/* 6. RESPONSIVE DESIGN */
+/* ======================================================= */
+
+@media (max-width: 768px) {
+  .burger {
+    display: block;
   }
+
   .org-sidebar {
-    width: 220px;
-    background: #222;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: var(--color-secondary);
+    transition: left 0.3s ease;
   }
-  .org-sidebar nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+
+  .org-sidebar.open {
+    left: 0;
   }
+
   .org-main {
-    flex: 1;
-    padding: 30px;
-    background: #f7f7f7;
+    padding-top: 80px;
   }
+
+  .org-sidebar nav a {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .org-sidebar button {
+    margin-bottom: 20px;
+  }
+}

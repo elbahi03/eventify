@@ -9,6 +9,10 @@ import {
   updateEvent,
   createEvent,
 } from "../../features/events/eventsSlice";
+import "../styles/yass.css";
+
+
+
 
 export default function UserEvents() {
   const dispatch = useDispatch();
@@ -108,6 +112,7 @@ export default function UserEvents() {
             Créer un événement
           </button>
         ) : (
+          <div className="modal-overlay">
           <form
             onSubmit={handleCreateSubmit}
             className="bg-white shadow-md rounded-xl p-6 max-w-lg mx-auto space-y-4"
@@ -242,6 +247,7 @@ export default function UserEvents() {
               </button>
             </div>
           </form>
+          </div>
         )}
       </div>
 
@@ -250,6 +256,7 @@ export default function UserEvents() {
         {events.map((event) => (
           <div key={event.id} className="bg-white shadow-md rounded-xl p-4 hover:shadow-lg transition">
             {editingId === event.id ? (
+            <div className="modal-overlay">
               <form onSubmit={(e) => handleUpdateSubmit(e, event.id)}>
                 <input
                   type="text"
@@ -299,6 +306,7 @@ export default function UserEvents() {
                   </button>
                 </div>
               </form>
+              </div>
             ) : (
               <>
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>

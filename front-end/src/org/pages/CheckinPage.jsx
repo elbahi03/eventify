@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { verifyParticipant } from '../../features/participants/participantsSlice';
-import { fetchEventsByUser, selectAllEvents } from '../../features/events/eventsSlice';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { verifyParticipant } from "../../features/participants/participantsSlice";
+import { fetchEventsByUser, selectAllEvents } from "../../features/events/eventsSlice";
+import "../styles/checkin.css";
 
 export default function CheckinPage() {
   const dispatch = useDispatch();
   const events = useSelector(selectAllEvents);
-  const user = useSelector(state => state.auth?.user);
-  
-  const [selectedEventId, setSelectedEventId] = useState('');
-  const [CIN, setCin] = useState('');
-  const [message, setMessage] = useState('');
+  const user = useSelector((state) => state.auth?.user);
+
+  const [selectedEventId, setSelectedEventId] = useState("");
+  const [CIN, setCin] = useState("");
+  const [message, setMessage] = useState("");
   const [participant, setParticipant] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -26,94 +27,119 @@ export default function CheckinPage() {
     if (!CIN.trim() || !selectedEventId) return;
 
     setLoading(true);
-    setMessage('');
+    setMessage("");
     setParticipant(null);
 
     try {
-      const result = await dispatch(verifyParticipant({ 
-        CIN,
-        eventId: selectedEventId 
-      })).unwrap();
-      
+      const result = await dispatch(
+        verifyParticipant({
+          CIN,
+          eventId: selectedEventId,
+        })
+      ).unwrap();
+
       if (result.participant) {
         setParticipant(result.participant);
-        setMessage(result.message || 'Participant vérifié avec succès !');
+        setMessage(result.message || "Participant vérifié avec succès !");
       }
     } catch (error) {
-      setMessage(error || 'Participant non trouvé ou CIN invalide pour cet événement.');
+      setMessage(error || "Participant non trouvé ou CIN invalide pour cet événement.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Vérification des participants</h2>
-      
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Sélectionner l'événement :
+    <div className="checkin-page-container">
+      <h2 className="checkin-title">Vérification des participants</h2>
+
+      <div className="checkin-form-card">
+        <form onSubmit={handleSubmit}>
+          {/* Sélection de l'événement */}
+          <div className="form-group">
+            <label className="form-label">Sélectionner l'événement :</label>
             <select
+              className="form-select"
               value={selectedEventId}
               onChange={(e) => setSelectedEventId(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               disabled={loading}
               required
             >
-              <option value="">-- Choisir un événement --</option>
-              {events.map(event => (
+              <option value="">Choisir un événement</option>
+              {events.map((event) => (
                 <option key={event.id} value={event.id}>
                   {event.title}
                 </option>
               ))}
             </select>
-          </label>
-        </div>
+          </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Numéro CIN :
+          {/* Numéro CIN */}
+          <div className="form-group">
+            <label className="form-label">Numéro CIN :</label>
             <input
               type="text"
+              className="form-input"
               value={CIN}
               onChange={(e) => setCin(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Entrez le numéro CIN"
               disabled={loading || !selectedEventId}
               required
             />
-          </label>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading || !CIN.trim() || !selectedEventId}
-          className={`w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
-            (loading || !selectedEventId) ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          {loading ? 'Vérification...' : 'Vérifier'}
-        </button>
-
-        {message && (
-          <div className={`mt-4 p-4 rounded ${
-            participant ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}>
-            {message}
           </div>
-        )}
 
+          {/* Bouton de vérification */}
+          <button
+            type="submit"
+            className={`checkin-button ${loading || !CIN.trim() || !selectedEventId ? "disabled" : ""}`}
+            disabled={loading || !CIN.trim() || !selectedEventId}
+          >
+            {loading ? "Vérification..." : "Vérifier"}
+          </button>
+
+          {/* Message d’état */}
+          {message && (
+            <div
+              className={`status-message ${participant ? "success" : "error"}`}
+            >
+              {message}
+            </div>
+          )}
+        </form>
+
+        {/* Modal d’affichage du participant */}
         {participant && (
-          <div className="mt-6 p-4 bg-gray-100 rounded">
-            <h3 className="font-bold mb-2">Informations du participant :</h3>
-            <p><strong>Nom :</strong> {participant.name}</p>
-            <p><strong>Email :</strong> {participant.email}</p>
-            <p><strong>CIN :</strong> {participant.CIN}</p>
-            <p><strong>Événement :</strong> {events.find(e => e.id === selectedEventId)?.title || 'N/A'}</p>
+          <div className="modal-overlay">
+            <div className="participant-card-modal">
+              <button
+                className="modal-close-button"
+                onClick={() => setParticipant(null)}
+              >
+                &times;
+              </button>
+
+              <h3 className="card-title">Informations du participant</h3>
+
+              <div className="card-info">
+                <p>
+                  <strong>Nom :</strong> {participant.full_name}
+                </p>
+                <p>
+                  <strong>Email :</strong> {participant.email}
+                </p>
+                <p>
+                  <strong>CIN :</strong> {participant.CIN}
+                </p>
+                <p>
+                  <strong>Téléphone :</strong> {participant.phone_number}
+                </p>
+              </div>
+
+              <div className="card-status success">Participant Vérifié</div>
+            </div>
           </div>
         )}
-      </form>
+      </div>
     </div>
   );
 }

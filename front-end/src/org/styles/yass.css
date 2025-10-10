@@ -1,0 +1,240 @@
+/* ======================================================= */
+/* 1. Variables Globales (Rappel) */
+/* ======================================================= */
+:root {
+  --color-primary: #FF7F50; /* Orange Vif (Action principale) */
+  --color-secondary: #2C3E50; /* Bleu Profond (Texte/Structure) */
+  --color-success: #2ECC71; /* Vert Succès (Création/Sauvegarde) */
+  --color-danger: #E74C3C; /* Rouge Danger (Suppression/Annulation) */
+  --color-info: #3498DB; /* Bleu Info (Modification) */
+  --color-text-light: #f4f4f4;
+  --color-background-light: #ffffff;
+  --color-background-dark: #ecf0f1;
+  --spacing-unit: 8px;
+}
+
+/* ======================================================= */
+/* 2. Styles de la Page et Messages d'État */
+/* ======================================================= */
+
+.p-6 { padding: calc(6 * var(--spacing-unit)); } /* Conteneur global */
+
+.text-2xl { font-size: 1.5rem; } /* h2 */
+.font-bold { font-weight: bold; }
+.text-center { text-align: center; }
+.mb-6 { margin-bottom: calc(6 * var(--spacing-unit)); }
+
+h2.text-center {
+  color: var(--color-secondary);
+  border-bottom: 2px solid var(--color-primary);
+  display: inline-block;
+  padding-bottom: var(--spacing-unit);
+}
+
+/* Messages d'état (Chargement, Erreur, Aucun événement) */
+.text-gray-500, .text-gray-600 { color: #888; font-style: italic; }
+.text-red-500 { color: var(--color-danger); font-weight: bold; }
+
+/* Bouton principal "Créer un événement" */
+.bg-green-500.text-white { 
+  background-color: var(--color-success); 
+  color: var(--color-text-light);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+}
+.bg-green-500.text-white:hover {
+  background-color: #27AE60;
+}
+
+/* ======================================================= */
+/* 3. Grille des Cartes d'Événement */
+/* ======================================================= */
+
+.grid { display: grid; }
+.gap-6 { gap: calc(6 * var(--spacing-unit)); }
+
+/* Responsive Grid (simule les classes Tailwind) */
+.grid-cols-1 { grid-template-columns: 1fr; }
+@media (min-width: 640px) { /* sm:grid-cols-2 */
+    .grid-cols-1.sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) { /* lg:grid-cols-3 */
+    .grid-cols-1.lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+.bg-white.shadow-md.rounded-xl {
+  background-color: var(--color-background-light);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: calc(4 * var(--spacing-unit));
+  transition: box-shadow 0.3s ease;
+  border-left: 5px solid var(--color-secondary); /* Couleur de structure */
+}
+
+.bg-white.shadow-md.rounded-xl:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Texte dans la carte */
+.text-xl.font-semibold { /* h3 */
+  font-size: 1.25rem;
+  color: var(--color-secondary);
+  margin-bottom: calc(2 * var(--spacing-unit));
+}
+.text-gray-600 { color: #555; }
+.text-gray-700 { color: #444; }
+
+.bg-white.shadow-md.rounded-xl strong {
+  color: var(--color-primary);
+}
+
+/* Conteneur des boutons (Modification/Suppression) */
+.flex.justify-between {
+  display: flex;
+  justify-content: space-between;
+  margin-top: calc(3 * var(--spacing-unit));
+}
+
+/* Styles des boutons d'action */
+.bg-blue-500, .bg-red-500, .bg-green-500, .bg-gray-300 {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-light); /* Par défaut pour les boutons colorés */
+}
+
+.bg-blue-500 { background-color: var(--color-info); }
+.bg-blue-500:hover { background-color: #2980B9; }
+
+.bg-red-500 { background-color: var(--color-danger); }
+.bg-red-500:hover { background-color: #C0392B; }
+
+.bg-green-500 { background-color: var(--color-success); }
+.bg-green-500:hover { background-color: #27AE60; }
+
+.bg-gray-300 { 
+  background-color: #D1D5DB; 
+  color: #374151; /* Texte sombre sur gris clair */
+}
+.bg-gray-300:hover { background-color: #A1A7B1; }
+
+/* ======================================================= */
+/* 4. Fenêtre Modale (Création et Modification) */
+/* ======================================================= */
+
+/* L'arrière-plan sombre */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Plus sombre pour mieux masquer le fond */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; 
+}
+
+/* Le contenu de la modale (le formulaire) */
+.bg-white.shadow-md.rounded-xl.p-6 { /* Cible le formulaire de création */
+    /* Ces styles écrasent les styles du formulaire de création pour le transformer en modal */
+    background-color: var(--color-background-light); 
+    padding: calc(6 * var(--spacing-unit)); 
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 600px; /* max-w-lg */
+    width: 90%;
+    max-height: 90vh; 
+    overflow-y: auto; 
+    position: relative;
+    /* Suppression des marges automatiques du formulaire de création */
+    margin: 0 !important; 
+}
+
+/* Titre dans le modal */
+.modal-overlay h3 {
+    font-size: 1.8rem;
+    color: var(--color-secondary);
+    margin-bottom: calc(4 * var(--spacing-unit));
+    padding-bottom: calc(2 * var(--spacing-unit));
+    border-bottom: 2px dashed #ccc;
+}
+
+/* Champs de formulaire (Input, Select, Textarea) */
+.border.rounded.p-2.w-full,
+.border.rounded.p-1.mb-2.w-full {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: calc(2 * var(--spacing-unit)); /* Pour l'espacement */
+    box-sizing: border-box; 
+    transition: border-color 0.3s;
+}
+
+.border.rounded.p-2.w-full:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 127, 80, 0.1);
+}
+
+/* Gestion du flex pour les heures de début/fin */
+.flex.space-x-3 {
+    display: flex;
+    gap: calc(3 * var(--spacing-unit));
+}
+
+.flex.space-x-3 > * {
+    flex: 1; /* Assure que les inputs se divisent l'espace */
+}
+
+/* Conteneur des boutons dans le modal */
+.flex.justify-end.space-x-3.pt-4 {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(3 * var(--spacing-unit));
+    padding-top: calc(4 * var(--spacing-unit));
+    margin-top: calc(2 * var(--spacing-unit));
+}
+
+/* --- IMPORTANT : Modifier le JSX pour utiliser la Modale --- */
+/* Pour que cela fonctionne, vous devez envelopper vos formulaires de création et de modification avec le div.modal-overlay */
+
+/* Création */
+/*
+{!showCreateForm ? (
+  // ... bouton Créer
+) : (
+  <div className="modal-overlay"> 
+    <form onSubmit={handleCreateSubmit} className="bg-white shadow-md rounded-xl p-6 max-w-lg mx-auto space-y-4">
+      ...
+    </form>
+  </div>
+)}
+*/
+
+/* Modification */
+/*
+{events.map((event) => (
+  // ... carte événement
+  <div key={event.id} ...>
+    {editingId === event.id ? (
+      <div className="modal-overlay"> // IMPORTANT: Ajouter le modal-overlay
+        <form onSubmit={(e) => handleUpdateSubmit(e, event.id)} className="bg-white shadow-md rounded-xl p-6">
+          ...
+        </form>
+      </div>
+    ) : (
+      // ... affichage normal
+    )}
+  </div>
+))}
+*/
