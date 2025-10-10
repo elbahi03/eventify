@@ -10,10 +10,11 @@ import OrganizerLayout from './org/compenant/OrganizerLayout';
 import UserEvents from './org/pages/Eventorg';
 import ParticipantsOrg from './org/pages/ParticipantsOrg';
 import CheckinPage from './org/pages/CheckinPage';
+import Apropos from './page/apropos';
 
 function App() {
   const location = useLocation();
-  const hideHeaderRoutes = ["/login", "/register", "*","/organizer/dashboard","/organizer/events", "/organizer/participants", "/organizer/checkin"];
+  const hideHeaderRoutes = ["/login", "/register", "/*","/organizer/dashboard","/organizer/events", "/organizer/participants", "/organizer/checkin"];
 
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Listevent />} />
         <Route path="/events/:id" element={<EventDetails />} />
+        <Route path="/Apropos" element={<Apropos />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
         {/* Dashboard organisateur */}
         <Route path="/organizer" element={<OrganizerLayout />}>

@@ -7,9 +7,9 @@ import {
   selectEventsError,
 } from "../features/events/eventsSlice";
 import { useNavigate } from "react-router-dom";
-import "../style/Listevent.css";
+import "../style/aleratoire.css";
 
-export default function Aleratoire () {
+export default function Aleratoire() {
   const dispatch = useDispatch();
   const events = useSelector(selectAllEvents);
   const loading = useSelector(selectEventsLoading);
@@ -35,8 +35,8 @@ export default function Aleratoire () {
   }
 
   return (
-    <div>
-      <h2 className="center"> Sugsugtion </h2>
+    <div className="sugsugtion">
+      <h2 className="center"> Suggestions </h2>
 
       <div className="events-grid">
         {events.map((event) => (

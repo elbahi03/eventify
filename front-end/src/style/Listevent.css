@@ -1,114 +1,169 @@
-/* --- Container général --- */
+/* ======================================================= */
+/* 1. Variables Globales (à mettre en haut de votre feuille de style) */
+/* ======================================================= */
+:root {
+  --color-primary: #FF7F50; /* Orange Vif / Corail */
+  --color-secondary: #2C3E50; /* Bleu Profond */
+  --color-text-light: #f4f4f4;
+  --color-background-light: #ffffff;
+  --color-background-dark: #ecf0f1; /* Gris très clair */
+  --color-error: #E74C3C; /* Rouge Erreur */
+  --spacing-unit: 8px; /* Unité de base pour l'espacement */
+}
+
+/* Réinitialisation de base (si non fait ailleurs) */
+* {
+    box-sizing: border-box;
+}
+
+
+/* ======================================================= */
+/* 2. Conteneur de la Page et Titre */
+/* ======================================================= */
 
 .event-list-container {
-    width: 90%;                /* 🔹 plus fluide sur l’écran */
-    max-width: 1200px;         /* 🔹 limite maximale */
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #fafafa;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* --- Titre principal --- */
-  .title {
-    text-align: center;
-    color: #222;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  /* --- Section filtre --- */
-  .filter-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-  }
-  
-  .filter-section label {
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .filter-section select {
-    padding: 0.6rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fff;
-    cursor: pointer;
-    transition: border 0.3s ease;
-  }
-  
-  .filter-section select:hover {
-    border-color: #007bff;
-  }
-  
-  /* --- États --- */
-  .loading,
-  .error,
-  .no-events {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #555;
-    margin-top: 1.5rem;
-  }
-  
-  .error {
-    color: #e74c3c;
-  }
-  
-  /* --- Grille plus large --- */
-  .events-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* 🔹 s’adapte mieux */
-    gap: 1.5rem;
-  }
-  
-  /* --- Carte d'événement --- */
-  .event-card {
-    background-color: #fff;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
-  }
-  
-  .event-card h3 {
-    margin-bottom: 0.5rem;
-    color: #007bff;
-    font-size: 1.3rem;
-    text-transform: capitalize;
-  }
-  
-  .event-card p {
-    margin: 0.3rem 0;
-    color: #555;
-    font-size: 0.95rem;
-  }
-  
-  /* --- Bouton --- */
-  .event-card button {
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-  }
-  
-  .event-card button:hover {
-    background-color: #0056b3;
-  }
-  
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  padding: calc(4 * var(--spacing-unit)) 0;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--color-secondary);
+  text-align: center;
+  margin-bottom: calc(5 * var(--spacing-unit)); /* 40px */
+  padding-bottom: calc(1 * var(--spacing-unit));
+  border-bottom: 2px solid var(--color-primary); /* Ligne de séparation Orange */
+  display: block;
+}
+
+/* ======================================================= */
+/* 3. Section de Filtrage (Filter Section) */
+/* ======================================================= */
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: calc(5 * var(--spacing-unit));
+  background-color: var(--color-background-dark); 
+  padding: calc(2 * var(--spacing-unit)); /* 16px */
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section label {
+  font-weight: bold;
+  color: var(--color-secondary);
+  margin-right: calc(3 * var(--spacing-unit)); /* 24px */
+}
+
+.filter-section select {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: var(--color-background-light);
+  transition: border-color 0.3s ease;
+}
+
+.filter-section select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 127, 80, 0.2);
+}
+
+/* ======================================================= */
+/* 4. Grille des Événements et Cartes (Event Grid & Card) */
+/* ======================================================= */
+
+/* Grille Responsive */
+.events-grid {
+  display: grid;
+  /* Crée une grille de colonnes de min 300px et auto-ajustable */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: calc(4 * var(--spacing-unit)); /* 32px entre les cartes */
+  padding-top: calc(2 * var(--spacing-unit));
+}
+
+/* Style de la Carte */
+.event-card {
+  background-color: var(--color-background-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: calc(3 * var(--spacing-unit));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.event-card h3 {
+  font-size: 1.3rem;
+  color: var(--color-secondary);
+  margin-bottom: calc(1 * var(--spacing-unit));
+}
+
+.event-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: calc(0.5 * var(--spacing-unit));
+}
+
+.event-card strong {
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+/* Bouton 'Détails' dans la carte */
+.event-card button {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: calc(2 * var(--spacing-unit));
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+}
+
+.event-card button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-light); /* Blanc */
+}
+
+/* ======================================================= */
+/* 5. Feedback Utilisateur (Chargement, Erreur, Aucun Événement) */
+/* ======================================================= */
+
+.loading {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-primary); 
+  text-align: center;
+  padding: calc(4 * var(--spacing-unit));
+}
+
+.error {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-error);
+  background-color: #fddfdf;
+  border: 1px solid var(--color-error);
+  padding: calc(3 * var(--spacing-unit));
+  border-radius: 6px;
+  text-align: center;
+  margin: calc(4 * var(--spacing-unit)) auto;
+}
+
+.no-events {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  text-align: center;
+  padding: calc(4 * var(--spacing-unit));
+}

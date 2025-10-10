@@ -1,0 +1,136 @@
+/* ======================================================= */
+/* Variables Globales (Rappel) */
+/* ======================================================= */
+:root {
+    --color-primary: #FF7F50; /* Orange Vif */
+    --color-secondary: #2C3E50; /* Bleu Profond */
+    --color-text-light: #f4f4f4; 
+    --color-background-light: #ffffff;
+    --color-background-dark: #ecf0f1; /* Gris très clair */
+    --spacing-unit: 8px;
+  }
+  
+  /* Conteneur principal */
+  .apropos-container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    padding: calc(6 * var(--spacing-unit)) 0; /* Grand padding pour l'espace */
+  }
+  
+  /* ======================================================= */
+  /* En-tête de la Page (Hero) */
+  /* ======================================================= */
+  
+  .apropos-header {
+    text-align: center;
+    margin-bottom: calc(8 * var(--spacing-unit)); /* Espacement après l'en-tête */
+    padding: calc(4 * var(--spacing-unit));
+    background-color: var(--color-background-dark);
+    border-radius: 8px;
+  }
+  
+  .header-title {
+    font-size: 3rem;
+    color: var(--color-secondary);
+    margin-bottom: calc(2 * var(--spacing-unit));
+  }
+  
+  .header-tagline {
+    font-size: 1.3rem;
+    color: var(--color-primary); /* La couleur primaire donne du punch */
+    font-style: italic;
+  }
+  
+  /* ======================================================= */
+  /* Sections générales (Mission & Valeurs) */
+  /* ======================================================= */
+  
+  .mission-section,
+  .valeurs-section {
+    padding: calc(6 * var(--spacing-unit)) 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    color: var(--color-secondary);
+    text-align: center;
+    margin-bottom: calc(5 * var(--spacing-unit));
+    position: relative;
+  }
+  
+  /* Sous-ligne décorative pour le titre */
+  .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background-color: var(--color-primary);
+      margin: var(--spacing-unit) auto 0;
+  }
+  
+  .section-content p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 900px;
+    margin: calc(3 * var(--spacing-unit)) auto;
+    text-align: justify;
+  }
+  
+  /* ======================================================= */
+  /* Grille des Valeurs Clés */
+  /* ======================================================= */
+  
+  .valeurs-grid {
+    display: grid;
+    /* 3 colonnes de taille égale */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: calc(4 * var(--spacing-unit));
+    margin-top: calc(5 * var(--spacing-unit));
+  }
+  
+  .valeur-item {
+    text-align: center;
+    padding: calc(3 * var(--spacing-unit));
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    background-color: var(--color-background-light);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .valeur-title {
+    font-size: 1.3rem;
+    color: var(--color-primary); /* Utilisation de la couleur primaire */
+    margin-bottom: calc(2 * var(--spacing-unit));
+  }
+  
+  .valeur-item p {
+      font-size: 1rem;
+      color: #666;
+      margin: 0;
+      text-align: center;
+  }
+  
+  /* ======================================================= */
+  /* Pied de Page de la Section Apropos */
+  /* ======================================================= */
+
+  
+  /* Bouton principal (Réutilise la classe btn-primary si elle existe, sinon utilise ce style) */
+  .btn-primary-apropos {
+    padding: 12px 30px; 
+    font-size: 1.1rem;
+    background-color: var(--color-primary); 
+    color: var(--color-text-light);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary-apropos:hover {
+    background-color: #e56d40;
+  }

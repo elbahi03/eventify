@@ -1,63 +1,195 @@
-.add-participant-container{
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #f9f9f9;
+/* ======================================================= */
+/* 1. Variables Globales (à s'assurer que celles-ci sont définies une seule fois) */
+/* ======================================================= */
+:root {
+    --color-primary: #FF7F50; /* Orange Vif */
+    --color-secondary: #2C3E50; /* Bleu Profond */
+    --color-text-light: #f4f4f4;
+    --color-background-light: #ffffff;
+    --color-background-dark: #ecf0f1;
+    --color-success: #2ECC71; /* Vert Succès */
+    --color-error: #E74C3C; /* Rouge Erreur */
+    --spacing-unit: 8px;
+  }
+  
+  /* ======================================================= */
+  /* 2. Conteneur et Titre du Formulaire */
+  /* ======================================================= */
+  
+  .add-participant-container {
+    max-width: 500px; /* Taille idéale pour un formulaire */
+    margin: calc(6 * var(--spacing-unit)) auto; /* Centrage et espacement */
+    padding: calc(4 * var(--spacing-unit));
+    background-color: var(--color-background-light);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-}
-
-.add-participant-container h2{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-participant-container h2 {
+    font-size: 2rem;
+    color: var(--color-secondary);
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: calc(4 * var(--spacing-unit));
+  }
+  
+  /* Style de base du formulaire */
+  .add-participant-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* ======================================================= */
+  /* 3. Champs de Saisie (Input Fields) */
+  /* ======================================================= */
+  
+  .inputbox {
+    margin-bottom: calc(3 * var(--spacing-unit)); /* Espacement entre les champs */
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: var(--color-secondary);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .input-field:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 127, 80, 0.2); /* Ombre de focus orange */
+  }
+  
+  .input-field::placeholder {
+      color: #999;
+  }
+  
+  /* ======================================================= */
+  /* 4. Boutons d'Action (Submit et Reset) */
+  /* ======================================================= */
+  
+  /* Classes utilitaires pour aligner les deux boutons */
+  .flex {
+    display: flex;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  /* Bouton principal (Ajouter) */
+  .submit-button {
+    flex: 1; 
+    padding: 12px;
+    margin-right: calc(2 * var(--spacing-unit));
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover:not(:disabled) {
+    background-color: #e56d40;
+  }
+  
+  .submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Bouton secondaire (Réinitialiser) */
+  .reset-button {
+    flex: 1;
+    padding: 12px;
+    background-color: var(--color-background-dark);
+    color: var(--color-secondary);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reset-button:hover {
+    background-color: #d8dbdf;
+  }
+  
+  /* ======================================================= */
+  /* 5. Affichage du Succès (Ticket) et de l'Erreur */
+  /* ======================================================= */
+  
+  /* Section de succès (Participant ajouté) */
+  /* Cible la div qui contient le message de succès et le ticket */
+  .add-participant-container > div:nth-child(3) {
+    border-top: 2px dashed var(--color-success);
+    margin-top: calc(4 * var(--spacing-unit));
+    padding-top: calc(4 * var(--spacing-unit));
+    text-align: center;
+  }
+  
+  .add-participant-container h3 {
+    color: var(--color-success);
+    margin-bottom: calc(3 * var(--spacing-unit));
+  }
+  
+  .add-participant-container p {
+    text-align: left;
+    margin-bottom: var(--spacing-unit);
     color: #333;
-}
-.wrapper .inputbox {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    margin: 30px 20px;
-    color: black;
-    background-color: blue;
-}
-
-.input-field{
-    width: 100%;
-    height: 100%;
+    /* Assurez-vous que les paragraphes du ticket sont bien lisibles */
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .add-participant-container strong {
+      color: var(--color-secondary);
+  }
+  
+  /* Section QR Code */
+  .my-4 {
+      margin-top: calc(4 * var(--spacing-unit));
+      margin-bottom: calc(4 * var(--spacing-unit));
+  }
+  
+  .justify-center {
+      display: flex;
+      justify-content: center;
+  }
+  
+  /* Bouton Télécharger Ticket */
+  .add-participant-container > div:nth-child(3) button {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    padding: 10px 20px;
     border: none;
-    outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 40px;
-    font-size: 16px;
-    color: black;
-    padding: 20px 45px 20px 20px;
-    margin: 5px 0px;
-}
-
-.submit-button{
-    width: 45%;
-    height: 45px;
-    border-radius: 40px;
-    border: none;
-    outline: none;
-    background: #4CAF50;
-    color: white;
-    font-size: 16px;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
-    margin: 10px 5px;
-}
-
-.reset-button{
-    width: 45%;
-    height: 45px;
-    border-radius: 40px;
-    border: none;
-    outline: none;
-    background: #f44336;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 10px 5px;
-}
-
+    transition: background-color 0.3s ease;
+    margin-top: calc(2 * var(--spacing-unit));
+    margin-bottom: 0; /* Écrase le margin par défaut */
+  }
+  
+  .add-participant-container > div:nth-child(3) button:hover {
+    background-color: #3a5068;
+  }
+  
+  /* Message d'Erreur */
+  .add-participant-container > div:last-child {
+    color: var(--color-error);
+    background-color: #fddfdf;
+    border: 1px solid var(--color-error);
+    padding: calc(3 * var(--spacing-unit));
+    border-radius: 6px;
+    text-align: center;
+    margin-top: calc(4 * var(--spacing-unit));
+    font-weight: bold;
+  }

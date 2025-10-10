@@ -1,84 +1,138 @@
+/* ======================================================= */
+/* 1. Variables Globales (à s'assurer qu'elles sont définies une seule fois) */
+/* ======================================================= */
+:root {
+  --color-primary: #FF7F50; /* Orange Vif */
+  --color-secondary: #2C3E50; /* Bleu Profond */
+  --color-text-light: #f4f4f4;
+  --color-background-light: #ffffff;
+  --color-background-dark: #ecf0f1;
+  --color-error: #E74C3C;
+  --spacing-unit: 8px;
+}
+
+/* ======================================================= */
+/* 2. Conteneur Principal et Feedbacks d'État */
+/* ======================================================= */
+
 .event-details-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 3rem 1rem;
-    background-color: #f9fafb;
-    min-height: 100vh;
-  }
+  max-width: 900px;
+  width: 95%;
+  margin: calc(6 * var(--spacing-unit)) auto; /* Centrage et espacement */
+}
+
+/* Carte de l'événement (pour encadrer les détails) */
+.event-card {
+  background-color: var(--color-background-light);
+  padding: calc(6 * var(--spacing-unit)); /* Grand padding pour l'espace */
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Messages d'état */
+.loading, .error, .not-found {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: calc(8 * var(--spacing-unit));
+  font-weight: bold;
+}
+.loading { color: var(--color-primary); }
+.error { color: var(--color-error); }
+.not-found { color: var(--color-secondary); }
+
+/* ======================================================= */
+/* 3. Titre et Informations de l'Événement */
+/* ======================================================= */
+
+.event-title {
+  font-size: 3rem;
+  color: var(--color-secondary);
+  margin-bottom: calc(4 * var(--spacing-unit));
+  text-align: center;
+  border-bottom: 3px solid var(--color-primary);
+  padding-bottom: calc(2 * var(--spacing-unit));
+}
+
+.event-info {
+  display: grid;
+  /* Utilise deux colonnes sur desktop */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+  gap: calc(3 * var(--spacing-unit));
+  margin-bottom: calc(6 * var(--spacing-unit));
+  padding: calc(3 * var(--spacing-unit));
+  background-color: var(--color-background-dark);
+  border-radius: 6px;
+}
+
+.event-info p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.event-info strong {
+  color: var(--color-secondary);
+  font-weight: 700;
+  display: inline-block;
+  min-width: 100px; 
+}
+
+/* Force la description à prendre toute la largeur pour une meilleure lecture */
+.event-info p:has(strong:contains("Description")) {
+    grid-column: 1 / -1; 
+    margin-top: calc(3 * var(--spacing-unit));
+    border-top: 1px dashed #ccc;
+    padding-top: calc(3 * var(--spacing-unit));
+}
+
+/* ======================================================= */
+/* 4. Bouton de Participation et Formulaire */
+/* ======================================================= */
+
+/* Bouton "Participer" / "Annuler" (Appel à l'action clé) */
+.participate-btn {
+  display: block;
+  width: 100%; 
+  padding: 15px;
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.participate-btn:hover {
+  background-color: #e56d40;
+  transform: translateY(-2px);
+}
+
+/* Conteneur du formulaire (AddParticipant) */
+.participant-form {
+  margin-top: calc(6 * var(--spacing-unit));
+  padding-top: calc(4 * var(--spacing-unit));
+  border-top: 2px solid var(--color-background-dark);
   
-  /* --- Carte principale --- */
-  .event-card {
-    background-color: #fff;
-    border-radius: 16px;
-    padding: 2rem 2.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    width: 100%;
-    max-width: 700px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-  
-  /* --- Titre --- */
-  .event-title {
-    text-align: center;
-    color: #007bff;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  /* --- Informations --- */
-  .event-info p {
-    margin: 0.6rem 0;
-    color: #444;
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-  
-  .event-info strong {
-    color: #111;
-  }
-  
-  /* --- Bouton participer --- */
-  .participate-btn {
-    display: block;
-    margin: 2rem auto 1rem;
-    padding: 0.7rem 1.8rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-  }
-  
-  .participate-btn:hover {
-    background-color: #218838;
-  }
-  
-  /* --- Formulaire --- */
-  .participant-form {
-    margin-top: 1.5rem;
-    border-top: 1px solid #ddd;
-    padding-top: 1rem;
-  }
-  
-  /* --- États --- */
-  .loading,
-  .error,
-  .not-found {
-    text-align: center;
-    font-size: 1.1rem;
-    margin-top: 3rem;
-  }
-  
-  .error {
-    color: #e74c3c;
-  }
-  
+  /* Centrer le formulaire */
+  display: flex;
+  justify-content: center;
+}
+
+/* ======================================================= */
+/* 5. Adaptations Mobiles (Responsive) */
+/* ======================================================= */
+
+@media (max-width: 768px) {
+    .event-title {
+        font-size: 2rem;
+    }
+    .event-info {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    }
+    .event-card {
+        padding: calc(4 * var(--spacing-unit));
+    }
+}

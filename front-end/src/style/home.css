@@ -1,0 +1,91 @@
+:root {
+    --color-primary: #FF7F50;
+    --color-secondary: #2C3E50;
+    --color-text-light: #f4f4f4;
+    --color-background-light: #ffffff;
+    --spacing-unit: 8px;
+  }
+  
+  /* --- 2. Styles de la Section Hero --- */
+  
+  .hero {
+    /* Définir une hauteur pour qu'il soit visible */
+    min-height: 400px;
+    background-color: var(--color-secondary); 
+    /* Si vous ajoutez une image de fond plus tard, utilisez: 
+       background-image: url('votre-image.jpg'); 
+       background-size: cover; 
+       background-position: center; */
+    
+    /* Flexbox pour centrer le contenu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: calc(6 * var(--spacing-unit)) 0; /* Ajout de padding si min-height n'est pas utilisé */
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    padding: calc(3 * var(--spacing-unit));
+  }
+  
+  .hero-content h1 {
+    font-size: 3.5rem;
+    color: var(--color-text-light); /* Texte clair sur fond sombre */
+    margin-bottom: calc(2 * var(--spacing-unit));
+  }
+  
+  .hero-content p {
+    font-size: 1.5rem;
+    color: rgba(244, 244, 244, 0.9); /* Gris très clair pour la description */
+    margin-bottom: calc(4 * var(--spacing-unit));
+  }
+  
+  /* Style du Bouton "Get Started" (Orange Primaire) */
+  .hero-content .btn {
+    padding: 12px 30px; 
+    font-size: 1.2rem;
+    background-color: var(--color-primary); /* Orange Vif */
+    color: var(--color-text-light);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+  }
+  
+  .hero-content .btn:hover {
+    background-color: #e56d40; /* Orange légèrement plus foncé */
+    transform: translateY(-2px);
+  }
+  
+  /* --- 3. Styles des Sections d'Information --- */
+  
+  /* Appliquer un conteneur et un padding pour centrer le contenu des autres divs */
+  .home-section {
+    padding: calc(6 * var(--spacing-unit)) 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* Appliquer ce style aux autres sections si elles n'ont pas de classe spécifique */
+  .home-section h1 {
+    font-size: 2rem;
+    color: var(--color-secondary);
+    margin-bottom: calc(3 * var(--spacing-unit));
+    /* Ligne de séparation subtile */
+    border-bottom: 2px solid var(--color-primary); 
+    display: inline-block;
+    padding-bottom: var(--spacing-unit);
+  }
+  
+  .home-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  

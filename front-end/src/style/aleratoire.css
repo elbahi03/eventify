@@ -1,0 +1,94 @@
+/* Utilitaire pour centrer le texte */
+.center {
+    text-align: center;
+  }
+  
+  /* Titre des suggestions */
+  .sugsugtion {
+    padding-top: calc(4 * var(--spacing-unit));
+    text-align: center;
+  }
+  
+  .sugsugtion h2 {
+    font-size: 2.2rem;
+    color: var(--color-secondary);
+    margin-bottom: calc(4 * var(--spacing-unit));
+  }
+  
+  
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(4 * var(--spacing-unit)); 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 5%;
+  }
+  
+  
+  .event-card {
+    background-color: var(--color-background-light);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: calc(3 * var(--spacing-unit));
+    transition: transform 0.3s ease;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .event-card h3 {
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    margin-bottom: calc(2 * var(--spacing-unit));
+  }
+  
+  .event-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: calc(1 * var(--spacing-unit));
+  }
+  
+  .event-card strong {
+    font-weight: 600;
+    color: var(--color-secondary);
+  }
+  
+  .event-card button {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: calc(2 * var(--spacing-unit));
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .event-card button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+  }
+  
+  .mt-4 {
+    margin-top: calc(4 * var(--spacing-unit));
+  }
+  
+  /* Assurer que le bouton est centré */
+  .sugsugtion > .btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 12px 30px; 
+    font-size: 1.1rem;
+    border-radius: 40px;
+  }
+
+    .sugsugtion > .btn:hover {
+        background-color: #e56d40;
+    }

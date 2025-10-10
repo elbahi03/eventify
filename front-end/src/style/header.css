@@ -1,81 +1,148 @@
+/* ======================================================= */
+/* 1. Variables Globales (Rappel) */
+/* ======================================================= */
+:root {
+  --color-primary: #FF7F50; /* Orange Vif / Corail */
+  --color-secondary: #2C3E50; /* Bleu Profond */
+  --color-text-light: #f4f4f4; /* Blanc cassé */
+  --spacing-unit: 8px; /* Unité de base pour l'espacement */
+}
+
+/* Réinitialisation de base pour le composant */
+.header * {
+    box-sizing: border-box;
+}
+
+/* ======================================================= */
+/* 2. Style de l'En-tête (Desktop) */
+/* ======================================================= */
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #FEA405;
-    color: #DBE4C9;
-    padding: 15px 30px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    height: 100px;
-  }
+  background-color: var(--color-secondary);
+  color: var(--color-text-light);
+  padding: calc(2 * var(--spacing-unit)) 5%; /* Padding vertical et horizontal */
+  display: flex;
+  justify-content: space-between; /* Espacer le logo et la navigation */
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: sticky; /* Pour le maintenir en haut de l'écran */
+  top: 0;
+  z-index: 1000; /* Assurer qu'il est au-dessus du reste du contenu */
+}
+
+/* Logo */
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo a:hover {
+  color: var(--color-primary); /* Orange au survol */
+}
+
+/* Navigation (Desktop) */
+.nav {
+  display: flex;
+  gap: calc(4 * var(--spacing-unit)); /* Espacement entre les liens (32px) */
+}
+
+.nav a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 5px 0;
+  border-bottom: 2px solid transparent; /* Pour l'effet de survol */
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary); /* Soulignement orange au survol */
+}
+
+/* Masquer le Toggle sur Desktop */
+.menu-toggle {
+  display: none;
+}
+
+
+/* ======================================================= */
+/* 3. Styles Mobiles (Responsive - pour les petits écrans) */
+/* ======================================================= */
+
+@media (max-width: 768px) {
   
-  .logo a {
-    text-decoration: none;
-    color: #8AA624;
-    font-size: 30px;
-    font-weight: bold;
-  }
-  
-  .nav {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .nav a {
-    text-decoration: none;
-    color: #DBE4C9;
-    font-size: 20px;
-    transition: color 0.3s ease;
-  }
-  
-  .nav a:hover {
-    color: #8AA624;
-  }
-  
+  /* Afficher le Toggle et masquer la navigation */
   .menu-toggle {
-    display: none;
+    display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
     cursor: pointer;
-    gap: 5px;
+    z-index: 100; /* Assurer qu'il est cliquable */
   }
-  
+
   .menu-toggle span {
-    background: #DBE4C9;
+    display: block;
+    width: 100%;
     height: 3px;
-    width: 25px;
-    transition: all 0.3s ease;
+    background: var(--color-text-light);
+    border-radius: 3px;
+    transition: all 0.3s linear;
+    transform-origin: 1px;
   }
   
+  /* Animation du Toggle lors de l'ouverture (transforme en 'X') */
   .menu-toggle.open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg);
   }
+
   .menu-toggle.open span:nth-child(2) {
     opacity: 0;
+    transform: translateX(-20px);
   }
+
   .menu-toggle.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: rotate(-45deg);
   }
-  
-  @media (max-width: 768px) {
-    .nav {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: #FEA405;
-      flex-direction: column;
-      width: 200px;
-      padding: 15px;
-    }
-  
-    .nav.show {
-      display: flex;
-    }
-  
-    .menu-toggle {
-      display: flex;
-    }
+
+
+  /* Navigation */
+  .nav {
+    /* Positionner la navigation en tant qu'overlay */
+    position: absolute;
+    top: 100%; /* Juste en dessous du header */
+    left: 0;
+    width: 100%;
+    height: auto; /* Adapter la hauteur au contenu */
+    background-color: var(--color-secondary);
+    
+    /* Affichage vertical */
+    flex-direction: column; 
+    text-align: center;
+    padding: calc(4 * var(--spacing-unit)) 0; 
+    
+    /* Cacher par défaut */
+    display: none; 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    z-index: 999;
   }
-  
+
+  /* Afficher la navigation lorsque la classe 'show' est active */
+  .nav.show {
+    display: flex;
+    opacity: 1;
+  }
+
+  .nav a {
+    padding: calc(2 * var(--spacing-unit)) 0; /* Plus d'espace pour les liens */
+    width: 100%;
+    border-bottom: none;
+  }
+}

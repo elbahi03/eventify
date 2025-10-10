@@ -1,6 +1,7 @@
 import React from 'react'
 import Aleratoire from '../compenant/aleratoire';
 import { useNavigate } from 'react-router-dom';
+import '../style/home.css';
 
 function Home() {
   const navigate = useNavigate();
@@ -17,10 +18,10 @@ function Home() {
           <button className="btn" onClick={handlevoir}>Get Started</button>
         </div>
       </div>
-      <div>
-        <Aleratoire/>
+      <div className="home-section">
+        <Aleratoire />
       </div>
-      <div>
+      <div className="home-section">
         <h1> pour quoi nous ?</h1>
         <p> Eventify simplifie la gestion des événements, de la planification à l'exécution, en offrant une interface conviviale et des outils puissants pour organiser des événements mémorables.</p>
       </div>
